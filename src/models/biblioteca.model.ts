@@ -17,6 +17,7 @@ export class Biblioteca extends Entity {
   })
   nombre: string;
 
+  
   /*@belongsTo(() => Cliente)
   cliente: Cliente[];*/
   // Define well-known properties here
