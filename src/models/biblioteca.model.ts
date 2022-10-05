@@ -4,12 +4,12 @@ import { Cliente } from './cliente.model';
 @model({settings: {strict: false}})
 export class Biblioteca extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
-    generated: false,
+    generated: true,
     required: true,
   })
-  clave: string;
+  clave: number;
 
   @property({
     type: 'string',

@@ -10,11 +10,11 @@ export class Cliente extends Entity {
   Nombre: string;
 
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
     generated: true,
   })
-  Id?: string;
+  Id?: number;
 
   @hasMany(() => Biblioteca)
   biblioteca: Biblioteca[];
