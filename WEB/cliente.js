@@ -4,7 +4,9 @@ let contra = document.getElementById("Contra")
 let fecha = document.getElementById("fecha")
 let registrar = document.getElementById("Registrar")
 let consultar = document.getElementById("Consultar")
+let tabla = document.getElementById("Tabla")
 var arr = []
+
 registrar.addEventListener('click', ()=>{
     console.log(fecha.value+":35.000Z");
     fetch('http://localhost:3000/cliente', {
@@ -35,10 +37,24 @@ consultar.addEventListener('click', ()=>{
     })
     .then(res => res.json())
     .then(res =>{
-        let coulmna = document.createElement('td')
-        let fila = document.createElement('tr')
-        for (let i = 0; index < array.res; i++) {
-            
-        }})
+        crearTabla("Nombre","Correo","Contraseña","Cumpleaños")
+        res.forEach(element => {
+            crearTabla(element.Nombre,element.Correo,element.Contraseña,element.Cumpleaños)
+        })
+        //document.body.appendChild(tabla)
+    })
     .catch( err => console.error(err));
 })
+
+function crearTabla(a,b,c,d){
+    var fila = document.createElement("tr")
+    var celda = document.createElement("tr")
+
+    celda.appendChild(document.createTextNode(a));
+    celda.appendChild(document.createTextNode(b));
+    celda.appendChild(document.createTextNode(c));
+    celda.appendChild(document.createTextNode(d));
+
+    fila.appendChild(celda)
+    tabla.appendChild(fila)
+}
