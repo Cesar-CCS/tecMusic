@@ -1,13 +1,31 @@
 import {Entity, hasMany, model, property} from '@loopback/repository';
 import { Biblioteca } from './biblioteca.model';
 
-@model({settings: {strict: false}})
+@model({settings: {strict: true}})
 export class Cliente extends Entity {
   @property({
     type: 'string',
     required: true,
   })
   Nombre: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  Correo: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  Contraseña: string;
+
+  @property({
+    type: 'date',
+    required: true,
+  })
+  Cumpleaños: Date
 
   @property({
     type: 'number',
