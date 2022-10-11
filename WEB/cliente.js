@@ -7,6 +7,8 @@ let consultar = document.getElementById("Consultar")
 let tabla = document.getElementById("Tabla")
 let select = document.getElementById("idUsuarios")
 let consulta = document.getElementById("Consulta")
+let eleccion = document.getElementsByClassName("Eleccion")
+let realiza = document.getElementById("Realiza")
 //Metodo get para consultar ID de Usuarios y asignarlos al combobox
 fetch('http://localhost:3000/cliente', {
     method: 'GET',
@@ -22,20 +24,9 @@ fetch('http://localhost:3000/cliente', {
 })
 .catch( err => console.error(err));
 
-function obtenerID(){
-fetch('http://localhost:3000/cliente/'+select.value, {
-method: 'GET',
-headers: {"Content-Type": "application/json"}
+realiza.addEventListener('click', ()=>{
+    if(eleccion.ch)
 })
-.then(res => res.json())
-.then(res =>{
-    nombre.value = res.Nombre
-    correo.value = res.Correo
-    contra.value = res.Contraseña
-    fecha.value = res.Cumpleaños
-})
-.catch( err => console.error(err));
-}
 
 registrar.addEventListener('click', ()=>{
     crearUsuario()
@@ -57,6 +48,23 @@ consultar.addEventListener('click', ()=>{
     })
     .catch( err => console.error(err));
 })
+
+function obtenerID(){
+    fetch('http://localhost:3000/cliente/'+select.value, {
+    method: 'GET',
+    headers: {"Content-Type": "application/json"}
+    })
+    .then(res => res.json())
+    .then(res =>{
+        var auxfecha = new Date()
+        auxfecha = res.Cumpleaños
+        nombre.value = res.Nombre
+        correo.value = res.Correo
+        contra.value = res.Contraseña
+        fecha.value = auxfecha.toLocaleDateString()
+    })
+    .catch( err => console.error(err));
+}
 
 //Metodo que crea un usuario llamando al POST del fetch
 function crearUsuario(){

@@ -50,6 +50,10 @@
   ],
   "dependencies": {
     "@loopback/authentication": "^9.0.3",
+<<<<<<< HEAD
+=======
+    "@loopback/authentication-jwt": "^0.12.3",
+>>>>>>> d4007416413bc4c17cad055a6ad95b28b2b77014
     "@loopback/boot": "^5.0.3",
     "@loopback/core": "^4.0.3",
     "@loopback/repository": "^5.0.3",
@@ -61,11 +65,11 @@
   },
   "devDependencies": {
     "@loopback/build": "^9.0.3",
-    "source-map-support": "^0.5.21",
+    "@loopback/eslint-config": "^13.0.3",
     "@loopback/testlab": "^5.0.3",
     "@types/node": "^14.18.26",
-    "@loopback/eslint-config": "^13.0.3",
     "eslint": "^8.22.0",
+    "source-map-support": "^0.5.21",
     "typescript": "~4.7.4"
   }
 }

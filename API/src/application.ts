@@ -12,6 +12,14 @@ import {MySequence} from './sequence';
 
 export {ApplicationConfig};
 
+import {AuthenticationComponent} from '@loopback/authentication';
+import {
+  JWTAuthenticationComponent,
+  SECURITY_SCHEME_SPEC,
+  UserServiceBindings,
+} from '@loopback/authentication-jwt';
+import {TecMusicDsDataSource} from './datasources';
+
 export class TechmusicApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
@@ -40,5 +48,12 @@ export class TechmusicApplication extends BootMixin(
         nested: true,
       },
     };
+
+    this.component(AuthenticationComponent);
+    // Mount jwt component
+    this.component(JWTAuthenticationComponent);
+    // Bind datasource
+    this.dataSource(TecMusicDsDataSource, UserServiceBindings.DATASOURCE_NAME);
+
   }
 }
