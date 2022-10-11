@@ -25,11 +25,24 @@
         <p>Fecha de Nacimiento: </p>
         <input type="datetime-local" id="fecha">
     </div>
+    <form>
+        <select id="idUsuarios">
+            <option>ID</option>
+        </select>
+    </form>
     <input id="Registrar" type="button" value="Registrar">
     <div>
-        <input id="Consultar" type="button" value="Consultar">
+        <input type="radio" class="Eleccion" name="contact" value="email">
+        <label for="Eleccion">Eliminar</label>
+        <input type="radio" id="contactChoice2" name="contact" value="phone">
+        <label for="Eleccion">Phone</label>
+        <input type="radio" id="contactChoice3" name="contact" value="mail">
+        <label for="contactChoice3">Mail</label>
+      </div>
+    <div>
+        <input id="Consultar" type="button" value="Ver Registros">
             <div>
-                <table id="Tabla" class="default">
+                <table id="Tabla" class="table" style="border: 1px solid #000;width: 500px; height: 100px;">
                 </table>
             </div>
     </div>
