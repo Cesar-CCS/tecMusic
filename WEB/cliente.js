@@ -6,7 +6,7 @@ let registrar = document.getElementById("Registrar")
 let consultar = document.getElementById("Consultar")
 let tabla = document.getElementById("Tabla")
 let select = document.getElementById("idUsuarios")
-
+let consulta = document.getElementById("Consulta")
 //Metodo get para consultar ID de Usuarios y asignarlos al combobox
 fetch('http://localhost:3000/cliente', {
     method: 'GET',
@@ -22,11 +22,26 @@ fetch('http://localhost:3000/cliente', {
 })
 .catch( err => console.error(err));
 
+function obtenerID(){
+fetch('http://localhost:3000/cliente/'+select.value, {
+method: 'GET',
+headers: {"Content-Type": "application/json"}
+})
+.then(res => res.json())
+.then(res =>{
+    nombre.value = res.Nombre
+    correo.value = res.Correo
+    contra.value = res.Contraseña
+    fecha.value = res.Cumpleaños
+})
+.catch( err => console.error(err));
+}
 
 registrar.addEventListener('click', ()=>{
     crearUsuario()
 })
 
+consulta.addEventListener('click',obtenerID)
 //Peticion de los objetos Usuario en la Base de datos
 consultar.addEventListener('click', ()=>{
     fetch('http://localhost:3000/cliente', {
