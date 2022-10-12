@@ -24,9 +24,9 @@ fetch('http://localhost:3000/cliente', {
 })
 .catch( err => console.error(err));
 
-realiza.addEventListener('click', ()=>{
-    if(eleccion.ch)
-})
+// realiza.addEventListener('click', ()=>{
+//     if(eleccion.ch)
+// })
 
 registrar.addEventListener('click', ()=>{
     crearUsuario()
