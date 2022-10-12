@@ -24,10 +24,6 @@ fetch('http://localhost:3000/cliente', {
 })
 .catch( err => console.error(err));
 
-// realiza.addEventListener('click', ()=>{
-//     if(eleccion.ch)
-// })
-
 registrar.addEventListener('click', ()=>{
     crearUsuario()
 })
@@ -109,3 +105,12 @@ function crearTabla(a,b,c,d,auxCumple){
     fila.style.border = "1px solid #000"
     tabla.appendChild(fila)
 }
+//Eliminar
+elimina.addEventListener('click', ()->
+fetch('http://localhost:3000/cliente', {
+      method: 'DELETE',
+})
+.then(res => res.json())
+.then(res=> {
+      console.log(res);
+});
