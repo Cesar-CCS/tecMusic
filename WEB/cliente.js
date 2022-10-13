@@ -113,5 +113,5 @@ fetch('http://localhost:3000/cliente', {
 .then(res => res.json())
 .then(res=> {
     
-      //console.log(res);
+    console.log(res);
 });
