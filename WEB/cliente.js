@@ -106,7 +106,7 @@ function crearTabla(a,b,c,d,auxCumple){
     tabla.appendChild(fila)
 }
 //Eliminar
-elimina.addEventListener('click', ()=>
+eliminar.addEventListener('click', ()=>
 fetch('http://localhost:3000/cliente', {
       method: 'DELETE',
 })
@@ -114,4 +114,4 @@ fetch('http://localhost:3000/cliente', {
 .then(res=> {
     
     console.log(res);
-});
+}));
