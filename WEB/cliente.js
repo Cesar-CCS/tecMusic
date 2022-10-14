@@ -9,6 +9,9 @@ let select = document.getElementById("idUsuarios")
 let consulta = document.getElementById("Consulta")
 let eleccion = document.getElementsByClassName("Eleccion")
 let realiza = document.getElementById("Realiza")
+let eliminar = document.getElementById("Eliminar")
+let modificar = document.getElementById("Modificar")
+
 //Metodo get para consultar ID de Usuarios y asignarlos al combobox
 fetch('http://localhost:3000/cliente', {
     method: 'GET',
@@ -24,13 +27,39 @@ fetch('http://localhost:3000/cliente', {
 })
 .catch( err => console.error(err));
 
-// realiza.addEventListener('click', ()=>{
-//     if(eleccion.ch)
-// })
-
-registrar.addEventListener('click', ()=>{
-    crearUsuario()
+eliminar.addEventListener('click', () =>{
+    fetch('http://localhost:3000/cliente/'+select.value, {
+      method: 'DELETE',
 })
+.then(res => res.json())
+.then(res=> {
+      console.log(res);
+      window.alert("Usuario Eliminado");
+});
+})
+
+modificar.addEventListener('click', () =>{
+    fetch('http://localhost:3000/cliente/'+select.value, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+            Nombre: nombre.value,
+            Correo: correo.value,
+            Contraseña: contra.value,
+            Cumpleaños: fecha.value+":35.000Z",
+        })
+ })
+.then(res => res.json())
+.then(res=> {
+    console.log(res)
+    window.alert("Usuario Modificado");
+})
+.catch( err => console.error(err));
+})
+
+registrar.addEventListener('click',crearUsuario)
 
 consulta.addEventListener('click',obtenerID)
 //Peticion de los objetos Usuario en la Base de datos
@@ -49,6 +78,12 @@ consultar.addEventListener('click', ()=>{
     .catch( err => console.error(err));
 })
 
+function formato(formaFecha){
+    formaFecha = formaFecha.split(':');
+    var auxFecha = formaFecha[0]+":"+formaFecha[1]
+    return auxFecha
+}
+
 function obtenerID(){
     fetch('http://localhost:3000/cliente/'+select.value, {
     method: 'GET',
@@ -56,12 +91,10 @@ function obtenerID(){
     })
     .then(res => res.json())
     .then(res =>{
-        var auxfecha = new Date()
-        auxfecha = res.Cumpleaños
         nombre.value = res.Nombre
         correo.value = res.Correo
         contra.value = res.Contraseña
-        fecha.value = auxfecha.toLocaleDateString()
+        fecha.value = formato(res.Cumpleaños)
     })
     .catch( err => console.error(err));
 }
