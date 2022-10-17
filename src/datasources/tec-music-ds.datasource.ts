@@ -5,11 +5,11 @@ const config = {
   name: 'tecMusicDS',
   connector: 'mysql',
   url: '',
-  host: 'localhost',
+  host: 'tecsoundbd.ctek3palvpaf.us-east-2.rds.amazonaws.com',
   port: 3306,
-  user: 'root',
-  password: '1234',
-  database: 'tecmusic'
+  user: 'admin',
+  password: 'C3m0nchi2828.',
+  database: 'tecsoundbd'
 };
 
 // Observe application's life cycle to disconnect the datasource when
