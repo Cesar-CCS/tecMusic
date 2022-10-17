@@ -3,7 +3,7 @@ let contra = document.getElementById("Contra")
 let btnIngresar = document.getElementById("Ingresar")
 
 btnIngresar.addEventListener('click', () => {
-    fetch('https://tec-sounnd.herokuapp.com/login', {
+    fetch('https://tec-sounnd.herokuapp.com/users/login', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
