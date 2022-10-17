@@ -13,7 +13,7 @@ let eliminar = document.getElementById("Eliminar")
 let modificar = document.getElementById("Modificar")
 
 //Metodo get para consultar ID de Usuarios y asignarlos al combobox
-fetch('http://localhost:3000/cliente', {
+fetch('https://tec-sounnd.herokuapp.com/cliente', {
     method: 'GET',
     headers: {"Content-Type": "application/json"}
 })
@@ -28,7 +28,7 @@ fetch('http://localhost:3000/cliente', {
 .catch( err => console.error(err));
 
 eliminar.addEventListener('click', () =>{
-    fetch('http://localhost:3000/cliente/'+select.value, {
+    fetch('https://tec-sounnd.herokuapp.com/cliente/'+select.value, {
       method: 'DELETE',
 })
 .then(res => res.json())
@@ -39,7 +39,7 @@ eliminar.addEventListener('click', () =>{
 })
 
 modificar.addEventListener('click', () =>{
-    fetch('http://localhost:3000/cliente/'+select.value, {
+    fetch('https://tec-sounnd.herokuapp.com/cliente/'+select.value, {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
@@ -64,7 +64,7 @@ registrar.addEventListener('click',crearUsuario)
 consulta.addEventListener('click',obtenerID)
 //Peticion de los objetos Usuario en la Base de datos
 consultar.addEventListener('click', ()=>{
-    fetch('http://localhost:3000/cliente', {
+    fetch('https://tec-sounnd.herokuapp.com/cliente', {
         method: 'GET',
         headers: {"Content-Type": "application/json"}
     })
@@ -85,7 +85,7 @@ function formato(formaFecha){
 }
 
 function obtenerID(){
-    fetch('http://localhost:3000/cliente/'+select.value, {
+    fetch('https://tec-sounnd.herokuapp.com/cliente/'+select.value, {
     method: 'GET',
     headers: {"Content-Type": "application/json"}
     })
@@ -101,7 +101,7 @@ function obtenerID(){
 
 //Metodo que crea un usuario llamando al POST del fetch
 function crearUsuario(){
-    fetch('http://localhost:3000/cliente', {
+    fetch('https://tec-sounnd.herokuapp.com/cliente', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",

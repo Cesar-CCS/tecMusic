@@ -3,7 +3,7 @@ let contra = document.getElementById("Contra")
 let btnIngresar = document.getElementById("Registro")
 
 btnIngresar.addEventListener('click',() =>{
-    fetch('http://localhost:3000/signup', {
+    fetch('https://tec-sounnd.herokuapp.com/signup', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
