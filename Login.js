@@ -18,6 +18,7 @@ btnIngresar.addEventListener('click', () => {
     .then(res => res.json())
     .then(res=> {
         window.localStorage.setItem("token", res.token)
+        console.log(res)
     })
     .catch(res => console.log(res))
 })
