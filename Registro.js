@@ -19,6 +19,7 @@ btnIngresar.addEventListener('click',() =>{
         if(res.status == 200){
             alert("Registro Exitoso")
             console.log("Usuario Correcto")
+            location.assign("Login.html");
         }else{
             alert("Correo o contraseña incorrectas")
             console.log("Usuario Incorrecto")
