@@ -1,0 +1,49 @@
+body{
+    font-family: montserrat;
+    background: linear-gradient(150deg, #6c3483, #58D68D);
+    box-sizing: border-box;
+}
+
+form{
+    background-color: white;
+    border-radius: 3px;
+    color: #999;
+    padding: 25px;
+    margin: 0 auto;
+    width: 300px;
+}
+
+input[type="button"]{
+    border: 0;
+    color: white;
+    background: #6c3483;
+}
+
+input[id="Registrar"]{
+    position: relative;
+    top: 10px;
+}
+
+select{
+    position: relative;
+    top: 10px;
+    left: 50px;
+}
+
+input[id="Consulta"]{
+    position: relative;
+    top: 10px;
+    left: 75px;
+}
+
+input[id="Eliminar"]{
+    position: relative;
+    top: 39px;
+    left: 10px;
+}
+
+input[id="Modificar"]{
+    position: relative;
+    top: 20px;
+    left: 119px;
+}
