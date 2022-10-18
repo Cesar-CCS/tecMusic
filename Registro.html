@@ -5,16 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
+    <link rel="stylesheet" href="CSS/Login.css">
 </head>
 <body>
-    <div>
-        <p>Corrreo</p>
-        <input type="text" id="Correo">
-        <p>Contraseña</p>
-        <input type="text" id="Contra">
+    <div class="formulario">
+        <H1>REGISTRO</H1>
+        <form>
+            <div class="user">
+                <input type="text" id="Correo">
+                <label>Usuario</label>
+            </div>
+            <div class="user">
+                <input type="text" id="Contra">
+                <label>Contraseña</label>
+            </div>
+            <input type="button" value="Registrar" id="Registro">
+            <div class="registrarse">
+                ¿Ya tienes cuenta? <a href="Login.html">Da click aqui</a>
+            </div>
+        </form>
     </div>
-    <a href="Login.html"><input type="button" value="Registrar" id="Registro"></a>
-    <a href="Login.html"><input type="button" value="Iniciar sesion" id="IniSes"></a>
 </body>
 <script src="Registro.js"></script>
 </html>

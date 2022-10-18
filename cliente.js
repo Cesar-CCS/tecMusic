@@ -31,11 +31,15 @@ eliminar.addEventListener('click', () =>{
     fetch('https://tec-sounnd.herokuapp.com/cliente/'+select.value, {
       method: 'DELETE',
 })
-.then(res => res.json())
 .then(res=> {
-      console.log(res);
-      window.alert("Usuario Eliminado");
-});
+    console.log(res);
+    nombre.value = ""
+    correo.value = ""
+    contra.value = ""
+    window.alert("Usuario Eliminado");
+    location.assign("cliente.html");
+})
+.catch(err => console.error(err));
 })
 
 modificar.addEventListener('click', () =>{
@@ -51,10 +55,12 @@ modificar.addEventListener('click', () =>{
             Cumpleaños: fecha.value+":35.000Z",
         })
  })
-.then(res => res.json())
-.then(res=> {
-    console.log(res)
-    window.alert("Usuario Modificado");
+.then(res => {
+    nombre.value = ""
+    correo.value = ""
+    contra.value = ""
+    alert("Usuario Modificado");
+    location.assign("cliente.html");
 })
 .catch( err => console.error(err));
 })
@@ -119,26 +125,55 @@ function crearUsuario(){
     .then(res=> {
         console.log(res.Id);
         var opcion = document.createElement("option")
+        nombre.value = ""
+        correo.value = ""
+        contra.value = ""
         opcion.innerText = res.Id
         select.appendChild(opcion)
+        alert("Registro Exitoso")
+        crearTabla(res.Id,res.Nombre,res.Correo,res.Contraseña,res.Cumpleaños)
     })
-    .catch(res => console.log(res))
+    .catch(res => {
+        alert("Algo ocurrio mal")
+        console.log(res)})
 }
 
 //Metodo para crear tabla con base de datos, recibe 4 parametros
 function crearTabla(a,b,c,d,auxCumple){
     var fila = document.createElement("tr")
-    var celda = document.createElement("td")
-     //WIDTH="50" HEIGHT="50"
-    celda.style.width = "500px"
-    celda.appendChild(document.createTextNode(a));
-    celda.appendChild(document.createTextNode(b));
-    celda.appendChild(document.createTextNode(c));
-    celda.appendChild(document.createTextNode(d));
-    celda.appendChild(document.createTextNode(auxCumple));
 
+    var celda = document.createElement("td")
+    celda.innerText = a
     fila.appendChild(celda)
     celda.style.border = "1px solid #000"
     fila.style.border = "1px solid #000"
+
+    var celda = document.createElement("td")
+    celda.innerText = b
+    fila.appendChild(celda)
+    celda.style.border = "1px solid #000"
+    fila.style.border = "1px solid #000"
+
+    var celda = document.createElement("td")
+    celda.innerText = c
+    fila.appendChild(celda)
+    celda.style.border = "1px solid #000"
+    fila.style.border = "1px solid #000"
+
+    var celda = document.createElement("td")
+    celda.innerText = d
+    fila.appendChild(celda)
+    celda.style.border = "1px solid #000"
+    fila.style.border = "1px solid #000"
+
+    var celda = document.createElement("td")
+    celda.innerText = auxCumple
+    fila.appendChild(celda)
+
+    celda.style.border = "1px solid #000"
+    fila.style.border = "1px solid #000"
     tabla.appendChild(fila)
+    tabla.style.border = "1px solid #000";
+    tabla.style.height = "100px"
+    tabla.style.width = "500px"
 }

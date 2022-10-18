@@ -4,47 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario</title>
+    <link rel="stylesheet" href="CSS/Cliente.css">
 </head>
 <body>
-    <h1>REGISTRO USUARIO</h1>
-    <div id="RegistroU"></div>
-    <div>
-        <p>Nombre: </p>
-        <input id="Nombre" type="text">
-    </div>
-    <div>
-        <p>Correo: </p>
-        <input id="Correo" type="text">
-    </div>
-    <div>
-        <p>Contraseña: </p>
-        <input id="Contra" type="text">
-    </div>
-    <div>
-        <p>Fecha de Nacimiento: </p>
-        <input type="datetime-local" id="fecha">
-    </div>
-    <input id="Registrar" type="button" value="Registrar">
     <form>
+        <h4>REGISTRO DE USUARIOS</h4>
+        <div id="RegistroU"></div>
+        <div>
+            <p>Nombre: </p>
+            <input id="Nombre" type="text">
+        </div>
+        <div>
+            <p>Correo: </p>
+            <input id="Correo" type="text">
+        </div>
+        <div>
+            <p>Contraseña: </p>
+            <input id="Contra" type="text">
+        </div>
+        <div>
+            <p>Fecha de Nacimiento: </p>
+            <input type="datetime-local" id="fecha">
+        </div>
+        <input id="Registrar" type="button" value="Registrar">
         <select id="idUsuarios">
             <option>ID</option>
         </select>
         <input type="button" value="Consultar" id="Consulta">
-    </form>
-    <div>
         <input type="button" id="Eliminar" value="Eliminar">
         <input type="button" id="Modificar" value="Modificar">
-    </div>
+    </form>
     <div>
         <input id="Consultar" type="button" value="Ver Registros">
             <div>
-                <table id="Tabla" class="table" style="border: 1px solid #000;width: 500px; height: 100px;">
+                <table id="Tabla" class="table">
                 </table>
             </div>
     </div>
-    <a href="Index.html"><input type="button" value="Salir" id="Ingresar"></a>
-    <a href="Registro.html"><input type="button" value="Registrarse" id="Registrarse"></a>
 </body>
 <script src="cliente.js"></script>
 </html>
