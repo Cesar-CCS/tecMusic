@@ -76,10 +76,10 @@ consultar.addEventListener('click', ()=>{
     })
     .then(res => res.json())
     .then(res =>{
-        if(fila =! null){
+        /*if(fila =! null){
             tabla.removeChild(fila)
             console.log("Hola")
-        }
+        }*/
         crearTabla("ID","Nombre","Correo","Contraseña","Cumpleaños")
         res.forEach(Usuario => {
             crearTabla(Usuario.Id,Usuario.Nombre,Usuario.Correo,Usuario.Contraseña,Usuario.Cumpleaños)
