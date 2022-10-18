@@ -44,6 +44,14 @@ input[id="Eliminar"]{
 
 input[id="Modificar"]{
     position: relative;
-    top: 20px;
+    top: 5px;
     left: 119px;
+}
+
+input[id="Cerrar"]{
+    position: relative;
+    width: 150px;
+    height: 50px;
+    top: -350px;
+    left: 85%;
 }

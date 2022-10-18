@@ -11,6 +11,7 @@ let eleccion = document.getElementsByClassName("Eleccion")
 let realiza = document.getElementById("Realiza")
 let eliminar = document.getElementById("Eliminar")
 let modificar = document.getElementById("Modificar")
+let cerrar = document.getElementById("Cerrar")
 
 //Metodo get para consultar ID de Usuarios y asignarlos al combobox
 fetch('https://tec-sounnd.herokuapp.com/cliente', {
@@ -27,18 +28,19 @@ fetch('https://tec-sounnd.herokuapp.com/cliente', {
 })
 .catch( err => console.error(err));
 
+cerrar.addEventListener('click', () => {
+    alert("Hasta pronto")
+    window.localStorage.clear();
+    location.assign("Login.html");
+})
+
 eliminar.addEventListener('click', () =>{
     fetch('https://tec-sounnd.herokuapp.com/cliente/'+select.value, {
       method: 'DELETE',
 })
-.then(res=> {
-    console.log(res);
-    nombre.value = ""
-    correo.value = ""
-    contra.value = ""
-    window.alert("Usuario Eliminado");
-    location.assign("cliente.html");
-})
+.then(() =>{
+    alert("Usuario Eliminado")
+    location.assign("cliente.html")})
 .catch(err => console.error(err));
 })
 
@@ -56,11 +58,15 @@ modificar.addEventListener('click', () =>{
         })
  })
 .then(res => {
-    nombre.value = ""
-    correo.value = ""
-    contra.value = ""
-    alert("Usuario Modificado");
-    location.assign("cliente.html");
+    if(res.status == 200){
+        nombre.value = ""
+        correo.value = ""
+        contra.value = ""
+        alert("Usuario Modificado");
+        location.assign("cliente.html");
+    }else{
+        alert("Algo ocurrio mal, intenta otra vez")
+    }
 })
 .catch( err => console.error(err));
 })
@@ -76,8 +82,8 @@ consultar.addEventListener('click', ()=>{
     })
     .then(res => res.json())
     .then(res =>{
-        tabla.detach()
         crearTabla("ID","Nombre","Correo","Contraseña","Cumpleaños")
+        eliminarCeldas()
         res.forEach(Usuario => {
             crearTabla(Usuario.Id,Usuario.Nombre,Usuario.Correo,Usuario.Contraseña,Usuario.Cumpleaños)
         })
@@ -122,9 +128,15 @@ function crearUsuario(){
           })
           
     })
-    .then(res => res.json())
+    .then(res => {
+        if(res.status == 200){
+            alert("registro exitoso")
+        }else{
+            alert("Algo salio mal, intenta de nuevo")
+        }
+        return res.json()})
     .then(res=> {
-        console.log(res.Id);
+        console.log("Registro Exitoso")
         var opcion = document.createElement("option")
         nombre.value = ""
         correo.value = ""
@@ -137,6 +149,15 @@ function crearUsuario(){
     .catch(res => {
         alert("Algo ocurrio mal")
         console.log(res)})
+}
+
+function eliminarCeldas(){
+    //var row = document.getElementsByTagName("tr")
+    var rowCount = tabla.rows.length;
+    for (var i = 1; i < rowCount; i++) {
+    tabla.deleteRow(1);
+    }
+    console.log("Hecho");
 }
 
 //Metodo para crear tabla con base de datos, recibe 4 parametros

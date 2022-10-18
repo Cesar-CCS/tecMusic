@@ -20,7 +20,7 @@ btnIngresar.addEventListener('click', () => {
             console.log("Usuario Correcto")
             location.assign("Index.html");
         }else{
-            alert("Tienes un Error")
+            alert("Contraseña y/o Correo Incorrectos")
         }
         return res.json();
     })
