@@ -119,10 +119,16 @@ function crearUsuario(){
     .then(res=> {
         console.log(res.Id);
         var opcion = document.createElement("option")
+        nombre.value = ""
+        correo.value = ""
+        contra.value = ""
         opcion.innerText = res.Id
         select.appendChild(opcion)
+        alert("Registro Exitoso")
     })
-    .catch(res => console.log(res))
+    .catch(res => {
+        alert("Algo ocurrio mal")
+        console.log(res)})
 }
 
 //Metodo para crear tabla con base de datos, recibe 4 parametros

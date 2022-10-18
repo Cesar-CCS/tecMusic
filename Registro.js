@@ -15,7 +15,16 @@ btnIngresar.addEventListener('click',() =>{
           })
           
     })
-    .then(res => res.json())
+    .then(res => {
+        if(res.status == 200){
+            alert("Registro Exitoso")
+            console.log("Usuario Correcto")
+        }else{
+            alert("Correo o contraseña incorrectas")
+            console.log("Usuario Incorrecto")
+        }
+        console.log(res)
+        res.json()})
     .then(res=> {
         console.log(res.token);
     })

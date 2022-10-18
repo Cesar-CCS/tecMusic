@@ -15,14 +15,18 @@ btnIngresar.addEventListener('click', () => {
           })
           
     })
-    .then(res => res.json())
+    .then(res => {
+        if(res.status == 200){
+            console.log("Usuario Correcto");
+            location.assign("Index.html");
+        }else{
+            alert("Credenciales Incorrectas");
+            console.log("Usuario Incorrecto");
+        }
+        console.log(res)
+        res.json()})
     .then(res=> {
         window.localStorage.setItem("token", res.token)
-        if(res == 422){
-            console.log("Tienes un error")
-        }else{
-            console.log("Usuario correcto")
-        }
         console.log(res)
     })
     .catch(res => console.log(res))
