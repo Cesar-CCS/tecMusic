@@ -1,4 +1,4 @@
-import { UserServiceBindings } from '@loopback/authentication-jwt';
+import {RefreshTokenServiceBindings, UserServiceBindings} from '@loopback/authentication-jwt';
 import {TechmusicApplication} from './application';
 
 export async function migrate(args: string[]) {
@@ -9,10 +9,11 @@ export async function migrate(args: string[]) {
   await Promise.all(
     [
       ...app.find(UserServiceBindings.USER_REPOSITORY),
-      ...app.find(UserServiceBindings.USER_CREDENTIALS_REPOSITORY)
+      ...app.find(UserServiceBindings.USER_CREDENTIALS_REPOSITORY),
+      ...app.find(RefreshTokenServiceBindings.REFRESH_REPOSITORY)
     ].map(b => app.get(b.key))
   );
-  
+
   await app.boot();
   await app.migrateSchema({existingSchema});
 

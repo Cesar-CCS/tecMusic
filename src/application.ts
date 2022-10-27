@@ -1,11 +1,11 @@
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent,
-} from '@loopback/rest-explorer';
 import {RepositoryMixin} from '@loopback/repository';
 import {RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
@@ -15,10 +15,12 @@ export {ApplicationConfig};
 import {AuthenticationComponent} from '@loopback/authentication';
 import {
   JWTAuthenticationComponent,
-  SECURITY_SCHEME_SPEC,
-  UserServiceBindings,
+  MyUserService, RefreshTokenServiceBindings, TokenServiceBindings,
+  UserServiceBindings
 } from '@loopback/authentication-jwt';
 import {TecMusicDsDataSource} from './datasources';
+import {MailerServiceBindings} from './key';
+import {EmailService} from './services';
 
 export class TechmusicApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -54,6 +56,20 @@ export class TechmusicApplication extends BootMixin(
     this.component(JWTAuthenticationComponent);
     // Bind datasource
     this.dataSource(TecMusicDsDataSource, UserServiceBindings.DATASOURCE_NAME);
+    this.dataSource(TecMusicDsDataSource, RefreshTokenServiceBindings.DATASOURCE_NAME)
+    //new
+    this.bind(UserServiceBindings.USER_SERVICE).toClass(MyUserService);
+    //for jwt acces token
+    this.bind(TokenServiceBindings.TOKEN_SECRET).to("CLAVE SECRETA")
+    //for refresh token
+    this.bind(RefreshTokenServiceBindings.REFRESH_SECRET).to("CLAVE SECRETA")
 
+    //for jwt acces token
+    this.bind(TokenServiceBindings.TOKEN_EXPIRES_IN).to("3600")
+    //
+    this.bind(RefreshTokenServiceBindings.REFRESH_REPOSITORY).to("216000")
+
+    this.bind(MailerServiceBindings.MAILER_SERVICE).toClass(EmailService)
+      .to(new EmailService("francodrg99@gmail.com", "franco12"));
   }
 }
