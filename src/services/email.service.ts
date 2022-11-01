@@ -9,7 +9,7 @@ export class EmailService {
   constructor(emailHost: string, password: string) {
     this.emailHost = emailHost
     this.transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: 'gmail',
       auth: {
         user: emailHost,
         pass: password,

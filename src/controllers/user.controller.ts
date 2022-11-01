@@ -6,7 +6,7 @@ import {
 import {Credentials, RefreshTokenService, RefreshTokenServiceBindings, TokenObject, TokenServiceBindings, User, UserRepository, UserServiceBindings} from '@loopback/authentication-jwt';
 import {inject} from '@loopback/core';
 import {model, property} from '@loopback/repository';
-import {get, post, requestBody, SchemaObject} from '@loopback/rest';
+import {get, HttpErrors, param, post, requestBody, SchemaObject} from '@loopback/rest';
 import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {genSalt, hash} from 'bcryptjs';
 import {MailerServiceBindings} from '../key';
@@ -16,6 +16,7 @@ import {EmailService} from '../services';
 type RefreshGrant = {
   refreshToken: string;
 };
+
 
 // Describes the schema of grant object
 const RefreshGrantSchema: SchemaObject = {
@@ -116,14 +117,54 @@ export class UserController {
     const savedUser = await this.userRepository.create(newUserRequest);
 
     await this.userRepository.userCredentials(savedUser.id).create({password});
+    const userProfile = this.userService.convertToUserProfile(savedUser);
+    const token = await this.jwtService.generateToken(userProfile);
+    console.log("token: " + token);
+
+    await this.userRepository.updateById(savedUser.id, {verificationToken: token})
 
     await this.EmailService.sendMail({
       to: newUserRequest.email,
       text: "CORREO DE REGISTRO",
+      //html: `<a href="http://localhost:3000/users/confirmation?token=${token}">click aqui para confirmar correo</a>`,
       subject: "CORREO DE REGISTRO"
     });
-
     return savedUser;
+  }
+
+  @get('/confirmation/{token}', {
+    responses: {
+      '200': {
+        description: 'Verification Token',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                accessToken: {
+                  type: 'object',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  })
+  async confirmation(
+    @param.path.string('token') token: string,
+  ): Promise<User | null> {
+    if (!token) {
+      throw new HttpErrors.BadRequest('token format not valid');
+    }
+
+    var user = await this.userRepository.findOne({where: {verificationToken: token}})
+    if (user) {
+      await this.userRepository.updateById(user.id, {verificationToken: "", emailVerified: true})
+      return user;
+    } else {
+      throw new HttpErrors.BadRequest('token format not valid');
+    }
   }
 
   /**

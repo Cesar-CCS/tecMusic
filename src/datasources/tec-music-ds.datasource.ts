@@ -1,7 +1,7 @@
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
-/*const config = {
+const config = {
   name: 'tecMusicDS',
   connector: 'mysql',
   url: '',
@@ -10,8 +10,9 @@ import {juggler} from '@loopback/repository';
   user: 'admin',
   password: 'C3m0nchi2828.',
   database: 'tecsoundbd'
-};*/
-const config = {
+};
+
+/*const config = {
   name: 'tecMusicDS',
   connector: 'mysql',
   url: '',
@@ -20,7 +21,7 @@ const config = {
   user: 'root',
   password: '1234',
   database: 'tecmusic'
-};
+};*/
 
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down

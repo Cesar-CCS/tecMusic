@@ -1,26 +1,25 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
-import {
-  RestExplorerBindings,
-  RestExplorerComponent
-} from '@loopback/rest-explorer';
-import {ServiceMixin} from '@loopback/service-proxy';
-import path from 'path';
-import {MySequence} from './sequence';
-
-export {ApplicationConfig};
-
 import {AuthenticationComponent} from '@loopback/authentication';
 import {
   JWTAuthenticationComponent,
   MyUserService, RefreshTokenServiceBindings, TokenServiceBindings,
   UserServiceBindings
 } from '@loopback/authentication-jwt';
+import {BootMixin} from '@loopback/boot';
+import {ApplicationConfig} from '@loopback/core';
+import {RepositoryMixin} from '@loopback/repository';
+import {Request, Response, RestApplication} from '@loopback/rest';
+import {
+  RestExplorerBindings,
+  RestExplorerComponent
+} from '@loopback/rest-explorer';
+import {ServiceMixin} from '@loopback/service-proxy';
+import morgan from 'morgan';
+import path from 'path';
 import {TecMusicDsDataSource} from './datasources';
 import {MailerServiceBindings} from './key';
+import {MySequence} from './sequence';
 import {EmailService} from './services';
+export {ApplicationConfig};
 
 export class TechmusicApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -51,6 +50,8 @@ export class TechmusicApplication extends BootMixin(
       },
     };
 
+    this.setupLogging();
+
     this.component(AuthenticationComponent);
     // Mount jwt component
     this.component(JWTAuthenticationComponent);
@@ -67,9 +68,31 @@ export class TechmusicApplication extends BootMixin(
     //for jwt acces token
     this.bind(TokenServiceBindings.TOKEN_EXPIRES_IN).to("3600")
     //
-    this.bind(RefreshTokenServiceBindings.REFRESH_REPOSITORY).to("216000")
+    this.bind(RefreshTokenServiceBindings.REFRESH_EXPIRES_IN).to("216000")
 
     this.bind(MailerServiceBindings.MAILER_SERVICE).toClass(EmailService)
-      .to(new EmailService("francodrg99@gmail.com", "franco12"));
+      .to(new EmailService("francodrg99@gmail.com", "ybhbnryixldxsxfp"));
   }
+  private setupLogging() {
+    // Register `mrgan` express middleware
+    // Create a middleware factory wrapper for `morgan(format, options)`
+    const morganFactory = (config?: morgan.Options<Request, Response>) => {
+      this.debug('Morgan configuration', config);
+      return morgan('combined', config);
+    };
+
+    // Print out logs using `debug`
+    const defaultConfig: morgan.Options<Request, Response> = {
+      stream: {
+        write: str => {
+          this._debug(str);
+        },
+      },
+    };
+    this.expressMiddleware(morganFactory, defaultConfig, {
+      injectConfiguration: 'watch',
+      key: 'middleware.morgan',
+    });
+  }
+
 }
